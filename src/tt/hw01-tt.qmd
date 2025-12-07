@@ -27,7 +27,7 @@ frogID_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascienc
 frog_names <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-09-02/frog_names.csv')
 ```
 ```{r}
-View(frogID_data)
+#View(frogID_data)
 ```
 
 
