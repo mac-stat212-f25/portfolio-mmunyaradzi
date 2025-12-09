@@ -1,0 +1,35 @@
+---
+title: "Exam- Exploring ggvis"
+format: html
+---
+
+
+### Research question: How is petal length related to petal width across iris species?
+
+```{r}
+#install.packages("ggvis")
+#install.packages("shiny)
+library(shiny)
+library(ggvis)
+library(dplyr)
+```
+
+
+```{r}
+data(iris)
+
+iris %>%
+  ggvis(~Petal.Length, ~Petal.Width, fill = ~Species) %>%
+  layer_points() %>%
+  add_axis("x", title = "Petal Length (cm)") %>%
+  add_axis("y", title = "Petal Width (cm)") %>%
+  add_tooltip(function(df) {
+    paste0(
+      "Species: ", df$Species, "<br>",
+      "Petal Length: ", df$Petal.Length, " cm<br>",
+      "Petal Width: ", df$Petal.Width, " cm"
+    )
+  }, "hover") %>%
+  set_options(width = 600, height = 400)
+```
+> The scatter plot shows a clear positive relationship between petal length and petal width in the iris data, with longer petals generally associated with wider petals. The three color groups form distinct clusters, indicating that species differ markedly in their petal dimensions and occupy largely separate regions of the plot. This separation suggests that petal size is a strong morphological characteristic that can help distinguish between iris species.
