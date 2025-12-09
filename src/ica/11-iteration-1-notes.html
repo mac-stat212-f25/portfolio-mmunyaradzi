@@ -188,7 +188,7 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/exam/exam.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exam</span></a>
+  <a href="../../src/exam/exam.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Exam- Exploring ggvis</span></a>
   </div>
 </li>
       </ul>
@@ -220,7 +220,7 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/tt/hw01-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Homework 01</span></a>
+  <a href="../../src/tt/hw01-tt.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Frog Occurences Australia</span></a>
   </div>
 </li>
       </ul>
@@ -577,7 +577,7 @@ NULL</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                             min median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;                          &lt;bch:&gt; &lt;bch:&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 for (i in 1:1e+05) { x &lt;- c(x, i) }  15.4s  15.4s    0.0651    18.6GB     81.9</code></pre>
+1 for (i in 1:1e+05) { x &lt;- c(x, i) }  31.7s  31.7s    0.0315    18.6GB     39.6</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Example 2: Using a storage container!</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a><span class="co">#Notice median (time to run), mem_alloc (how much memory you are using), and gc (garbage collection)</span></span>
@@ -591,7 +591,7 @@ NULL</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                            min  median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;                       &lt;bch:tm&gt; &lt;bch:t&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 for (i in 1:1e+05) { x[i] &lt;- i }   2.11ms  2.15ms      463.     402KB     6.14</code></pre>
+1 for (i in 1:1e+05) { x[i] &lt;- i }   3.69ms  3.83ms      247.     402KB     4.12</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Example 3: Vectorized function</span></span>
 <span id="cb34-2"><a href="#cb34-2"></a><span class="co">#Notice median (time to run), mem_alloc (how much memory you are using), and gc (garbage collection)</span></span>
@@ -602,7 +602,7 @@ NULL</code></pre>
 <pre><code># A tibble: 1 × 6
   expression                      min   median `itr/sec` mem_alloc `gc/sec`
   &lt;bch:expr&gt;                 &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
-1 x &lt;- seq(1, 1e+05, by = 1)    235µs    305µs     3322.    1.91MB     87.8</code></pre>
+1 x &lt;- seq(1, 1e+05, by = 1)    412µs    552µs     1732.    1.91MB     51.3</code></pre>
 </div>
 </div>
 </section></section><section id="exercises" class="level2"><h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
@@ -845,20 +845,20 @@ NULL</code></pre>
 <pre><code>$mean
 function (x, ...) 
 UseMethod("mean")
-&lt;bytecode: 0x11bed3a58&gt;
+&lt;bytecode: 0x12516f258&gt;
 &lt;environment: namespace:base&gt;
 
 $med
 function (x, na.rm = FALSE, ...) 
 UseMethod("median")
-&lt;bytecode: 0x11b24bb40&gt;
+&lt;bytecode: 0x133ecf740&gt;
 &lt;environment: namespace:stats&gt;
 
 $sd
 function (x, na.rm = FALSE) 
 sqrt(var(if (is.vector(x) || is.factor(x)) x else as.double(x), 
     na.rm = na.rm))
-&lt;bytecode: 0x11cc9cd80&gt;
+&lt;bytecode: 0x113a2ab20&gt;
 &lt;environment: namespace:stats&gt;</code></pre>
 </div>
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">str</span>(list_of_fcts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
