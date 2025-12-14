@@ -204,7 +204,12 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/summarysheet/summary-sheet.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">summary sheet</span></a>
+  <a href="../../src/summarysheet/summary-sheet-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">summary sheet 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/summarysheet/summary-sheet.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">summary sheet 2</span></a>
   </div>
 </li>
       </ul>
@@ -359,17 +364,28 @@ cookieconsent.run({
 <span id="cb1-7"><a href="#cb1-7"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(showtext)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">library</span>(sysfonts)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="fu">library</span>(scales)</span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># NYT-style font pairing</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="fu">font_add_google</span>(<span class="st">"Libre Baskerville"</span>, <span class="st">"nyt_serif"</span>)  </span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="fu">font_add_google</span>(<span class="st">"Source Sans Pro"</span>, <span class="st">"nyt_sans"</span>)      </span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="fu">showtext_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <section id="how-did-crime-fare-by-province-in-south-africa-from-2015-to-2016" class="level3"><h3 class="anchored" data-anchor-id="how-did-crime-fare-by-province-in-south-africa-from-2015-to-2016">How did Crime fare by Province in South Africa from 2015 to 2016?</h3>
 <p>South Africa, with its diverse landscapes and complex social history, has long grappled with issues of crime that impact public safety, economic development, and community well-being. This solo project aims to visualize the distribution of crime across South Africa’s provinces during the 2015–2016 fiscal year using spatial data analysis and data visualization.<br></p>
 <p><br><strong>Objective:</strong></p>
 <p>The primary objective of this research is to provide a clear, intuitive map-based representation of total reported crimes by province.</p>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>crime <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../../data/raw/SouthAfricaCrimeStats_v2.csv"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># shape file</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a>map_data <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"../../data/raw/south_africa_Province_level_1_MAPOG/south_africa_Province_level_1.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># data</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>crime <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../../data/raw/SouthAfricaCrimeStats_v2.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># shape file</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>map_data <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"../../data/raw/south_africa_Province_level_1_MAPOG/south_africa_Province_level_1.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `south_africa_Province_level_1' from data source 
   `/Users/munyaradzi/Desktop/STAT212/portfolio_mmunyaradzi/data/raw/south_africa_Province_level_1_MAPOG/south_africa_Province_level_1.shp' 
@@ -382,15 +398,15 @@ Geodetic CRS:  WGS 84</code></pre>
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># increase spread by log transformation</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>crime_filtered <span class="ot">&lt;-</span> crime <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="fu">select</span>(Province, <span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># increase spread by log transformation</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>crime_filtered <span class="ot">&lt;-</span> crime <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">select</span>(Province, <span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Inspect data</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">head</span>(map_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Inspect data</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">head</span>(map_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 6 features and 6 fields
 Geometry type: MULTIPOLYGON
@@ -412,7 +428,7 @@ Geodetic CRS:  WGS 84
 5 south africa MULTIPOLYGON (((28.65157 -2...
 6 south africa MULTIPOLYGON (((29.75868 -2...</code></pre>
 </div>
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">head</span>(crime)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">head</span>(crime)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 14
   Province     Station  Category `2005-2006` `2006-2007` `2007-2008` `2008-2009`
@@ -428,47 +444,82 @@ Geodetic CRS:  WGS 84
 </div>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># group by province and create a sum for the entries</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>crime_filtered <span class="ot">&lt;-</span> crime <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">group_by</span>(Province) <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>))) </span>
-<span id="cb9-5"><a href="#cb9-5"></a></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co"># Standardize province names and lowercase &amp; remove extra spaces</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>crime_filtered <span class="ot">&lt;-</span> crime_filtered <span class="sc">%&gt;%</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(Province))) </span>
-<span id="cb9-9"><a href="#cb9-9"></a></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co"># correct KwaZulu-Natal Kwazulu/Natal mismatch</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a>crime_filtered <span class="ot">&lt;-</span> crime_filtered <span class="sc">%&gt;%</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">ifelse</span>(Province <span class="sc">==</span> <span class="st">"kwazulu-natal"</span>, <span class="st">"kwazulu/natal"</span>, Province))</span>
-<span id="cb9-13"><a href="#cb9-13"></a></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co"># rename shape1 to province</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a>map_data <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>  <span class="fu">rename</span>(<span class="at">Province =</span> shape1) <span class="sc">%&gt;%</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(Province)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># group by province and create a sum for the entries</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>crime_filtered <span class="ot">&lt;-</span> crime <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">group_by</span>(Province) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>))) </span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co"># Standardize province names and lowercase &amp; remove extra spaces</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a>crime_filtered <span class="ot">&lt;-</span> crime_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(Province))) </span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co"># correct KwaZulu-Natal Kwazulu/Natal mismatch</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a>crime_filtered <span class="ot">&lt;-</span> crime_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">ifelse</span>(Province <span class="sc">==</span> <span class="st">"kwazulu-natal"</span>, <span class="st">"kwazulu/natal"</span>, Province))</span>
+<span id="cb10-13"><a href="#cb10-13"></a></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co"># rename shape1 to province</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>map_data <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a>  <span class="fu">rename</span>(<span class="at">Province =</span> shape1) <span class="sc">%&gt;%</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(Province)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># join the csv and the shape file</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>map_data <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">left_join</span>(crime_filtered, <span class="at">by =</span> <span class="st">"Province"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># join the csv and the shape file</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>map_data <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">left_join</span>(crime_filtered, <span class="at">by =</span> <span class="st">"Province"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
-<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># plot</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> map_data, <span class="fu">aes</span>(<span class="at">fill =</span> <span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, <span class="at">na.value =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-8"><a href="#cb11-8"></a>    <span class="at">title =</span> <span class="st">"Total Crime Cases in South Africa (2015-2016)"</span>,</span>
-<span id="cb11-9"><a href="#cb11-9"></a>    <span class="at">fill =</span> <span class="st">"Cases"</span>,</span>
-<span id="cb11-10"><a href="#cb11-10"></a>    <span class="at">caption =</span> <span class="st">"Source: South African Police Service (SAPS)"</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># plot</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> map_data, <span class="fu">aes</span>(<span class="at">fill =</span> <span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a></span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
+<span id="cb12-9"><a href="#cb12-9"></a>  <span class="at">option =</span> <span class="st">"plasma"</span>,</span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="at">labels =</span> <span class="fu">label_comma</span>(),</span>
+<span id="cb12-11"><a href="#cb12-11"></a>  <span class="at">na.value =</span> <span class="st">"orange"</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>  )<span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-14"><a href="#cb12-14"></a>    <span class="at">title =</span> <span class="st">"Total Crime Cases in South Africa (2015–2016)"</span>,</span>
+<span id="cb12-15"><a href="#cb12-15"></a>    <span class="at">subtitle =</span> <span class="st">"White regions indicate Lesotho and Eswatini—independent countries geographically distinct from South Africa and excluded from the crime statistics."</span>,</span>
+<span id="cb12-16"><a href="#cb12-16"></a>    <span class="at">fill =</span> <span class="st">" "</span>,</span>
+<span id="cb12-17"><a href="#cb12-17"></a>    <span class="at">caption =</span> <span class="st">"Source: South African Police Service (SAPS)"</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>  <span class="fu">theme</span>(</span>
+<span id="cb12-21"><a href="#cb12-21"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(</span>
+<span id="cb12-22"><a href="#cb12-22"></a>      <span class="at">family =</span> <span class="st">"nyt_serif"</span>,</span>
+<span id="cb12-23"><a href="#cb12-23"></a>      <span class="at">size =</span> <span class="dv">24</span>,</span>
+<span id="cb12-24"><a href="#cb12-24"></a>      <span class="at">face =</span> <span class="st">"bold"</span>,</span>
+<span id="cb12-25"><a href="#cb12-25"></a>      <span class="at">hjust =</span> <span class="fl">0.5</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a>    ),</span>
+<span id="cb12-27"><a href="#cb12-27"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(</span>
+<span id="cb12-28"><a href="#cb12-28"></a>      <span class="at">family =</span> <span class="st">"nyt_sans"</span>,</span>
+<span id="cb12-29"><a href="#cb12-29"></a>      <span class="at">size =</span> <span class="dv">12</span>,</span>
+<span id="cb12-30"><a href="#cb12-30"></a>      <span class="at">color =</span> <span class="st">"gray30"</span>,</span>
+<span id="cb12-31"><a href="#cb12-31"></a>      <span class="at">hjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb12-32"><a href="#cb12-32"></a>      <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>)</span>
+<span id="cb12-33"><a href="#cb12-33"></a>    ),</span>
+<span id="cb12-34"><a href="#cb12-34"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(</span>
+<span id="cb12-35"><a href="#cb12-35"></a>      <span class="at">family =</span> <span class="st">"nyt_sans"</span>,</span>
+<span id="cb12-36"><a href="#cb12-36"></a>      <span class="at">size =</span> <span class="dv">11</span></span>
+<span id="cb12-37"><a href="#cb12-37"></a>    ),</span>
+<span id="cb12-38"><a href="#cb12-38"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(</span>
+<span id="cb12-39"><a href="#cb12-39"></a>      <span class="at">family =</span> <span class="st">"nyt_sans"</span>,</span>
+<span id="cb12-40"><a href="#cb12-40"></a>      <span class="at">size =</span> <span class="dv">10</span></span>
+<span id="cb12-41"><a href="#cb12-41"></a>    ),</span>
+<span id="cb12-42"><a href="#cb12-42"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(</span>
+<span id="cb12-43"><a href="#cb12-43"></a>      <span class="at">family =</span> <span class="st">"nyt_sans"</span>,</span>
+<span id="cb12-44"><a href="#cb12-44"></a>      <span class="at">size =</span> <span class="dv">9</span>,</span>
+<span id="cb12-45"><a href="#cb12-45"></a>      <span class="at">hjust =</span> <span class="dv">0</span></span>
+<span id="cb12-46"><a href="#cb12-46"></a>    )</span>
+<span id="cb12-47"><a href="#cb12-47"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="pv-01_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="pv-01_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1113,109 +1164,156 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "Professional Viz"</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">---</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a></span>
-<span id="cb12-5"><a href="#cb12-5"></a></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="in">```{r}</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#packages</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="fu">library</span>(readr)</span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="fu">library</span>(sf)</span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="fu">library</span>(viridis)</span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="in">```</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="fu">### How did Crime fare by Province in South Africa from 2015 to 2016?</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a></span>
-<span id="cb12-20"><a href="#cb12-20"></a>South Africa, with its diverse landscapes and complex social history, has long grappled with issues of crime that impact public safety, economic development, and community well-being.</span>
-<span id="cb12-21"><a href="#cb12-21"></a>This solo project aims to visualize the distribution of crime across South Africa's provinces during the 2015–2016 fiscal year using spatial data analysis and data visualization.\</span>
-<span id="cb12-22"><a href="#cb12-22"></a></span>
-<span id="cb12-23"><a href="#cb12-23"></a>\</span>
-<span id="cb12-24"><a href="#cb12-24"></a>**Objective:**</span>
-<span id="cb12-25"><a href="#cb12-25"></a></span>
-<span id="cb12-26"><a href="#cb12-26"></a>The primary objective of this research is to provide a clear, intuitive map-based representation of total reported crimes by province.</span>
-<span id="cb12-27"><a href="#cb12-27"></a></span>
-<span id="cb12-30"><a href="#cb12-30"></a><span class="in">```{r}</span></span>
-<span id="cb12-31"><a href="#cb12-31"></a><span class="co"># data</span></span>
-<span id="cb12-32"><a href="#cb12-32"></a>crime <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../../data/raw/SouthAfricaCrimeStats_v2.csv"</span>)</span>
-<span id="cb12-33"><a href="#cb12-33"></a></span>
-<span id="cb12-34"><a href="#cb12-34"></a></span>
-<span id="cb12-35"><a href="#cb12-35"></a><span class="co"># shape file</span></span>
-<span id="cb12-36"><a href="#cb12-36"></a>map_data <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"../../data/raw/south_africa_Province_level_1_MAPOG/south_africa_Province_level_1.shp"</span>)</span>
-<span id="cb12-37"><a href="#cb12-37"></a></span>
-<span id="cb12-38"><a href="#cb12-38"></a></span>
-<span id="cb12-39"><a href="#cb12-39"></a><span class="in">```</span></span>
-<span id="cb12-40"><a href="#cb12-40"></a></span>
-<span id="cb12-43"><a href="#cb12-43"></a><span class="in">```{r}</span></span>
-<span id="cb12-44"><a href="#cb12-44"></a><span class="co"># increase spread by log transformation</span></span>
-<span id="cb12-45"><a href="#cb12-45"></a>crime_filtered <span class="ot">&lt;-</span> crime <span class="sc">%&gt;%</span></span>
-<span id="cb12-46"><a href="#cb12-46"></a>  <span class="fu">select</span>(Province, <span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-47"><a href="#cb12-47"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>))</span>
-<span id="cb12-48"><a href="#cb12-48"></a><span class="in">```</span></span>
-<span id="cb12-49"><a href="#cb12-49"></a></span>
-<span id="cb12-52"><a href="#cb12-52"></a><span class="in">```{r}</span></span>
-<span id="cb12-53"><a href="#cb12-53"></a><span class="co"># Inspect data</span></span>
-<span id="cb12-54"><a href="#cb12-54"></a><span class="fu">head</span>(map_data)</span>
-<span id="cb12-55"><a href="#cb12-55"></a><span class="fu">head</span>(crime)</span>
-<span id="cb12-56"><a href="#cb12-56"></a></span>
-<span id="cb12-57"><a href="#cb12-57"></a></span>
-<span id="cb12-58"><a href="#cb12-58"></a><span class="in">```</span></span>
-<span id="cb12-59"><a href="#cb12-59"></a></span>
-<span id="cb12-62"><a href="#cb12-62"></a><span class="in">```{r}</span></span>
-<span id="cb12-63"><a href="#cb12-63"></a><span class="co"># group by province and create a sum for the entries</span></span>
-<span id="cb12-64"><a href="#cb12-64"></a>crime_filtered <span class="ot">&lt;-</span> crime <span class="sc">%&gt;%</span></span>
-<span id="cb12-65"><a href="#cb12-65"></a>  <span class="fu">group_by</span>(Province) <span class="sc">%&gt;%</span></span>
-<span id="cb12-66"><a href="#cb12-66"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>))) </span>
-<span id="cb12-67"><a href="#cb12-67"></a></span>
-<span id="cb12-68"><a href="#cb12-68"></a><span class="co"># Standardize province names and lowercase &amp; remove extra spaces</span></span>
-<span id="cb12-69"><a href="#cb12-69"></a>crime_filtered <span class="ot">&lt;-</span> crime_filtered <span class="sc">%&gt;%</span></span>
-<span id="cb12-70"><a href="#cb12-70"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(Province))) </span>
-<span id="cb12-71"><a href="#cb12-71"></a></span>
-<span id="cb12-72"><a href="#cb12-72"></a><span class="co"># correct KwaZulu-Natal Kwazulu/Natal mismatch</span></span>
-<span id="cb12-73"><a href="#cb12-73"></a>crime_filtered <span class="ot">&lt;-</span> crime_filtered <span class="sc">%&gt;%</span></span>
-<span id="cb12-74"><a href="#cb12-74"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">ifelse</span>(Province <span class="sc">==</span> <span class="st">"kwazulu-natal"</span>, <span class="st">"kwazulu/natal"</span>, Province))</span>
-<span id="cb12-75"><a href="#cb12-75"></a></span>
-<span id="cb12-76"><a href="#cb12-76"></a><span class="co"># rename shape1 to province</span></span>
-<span id="cb12-77"><a href="#cb12-77"></a>map_data <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span></span>
-<span id="cb12-78"><a href="#cb12-78"></a>  <span class="fu">rename</span>(<span class="at">Province =</span> shape1) <span class="sc">%&gt;%</span></span>
-<span id="cb12-79"><a href="#cb12-79"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(Province)))</span>
-<span id="cb12-80"><a href="#cb12-80"></a><span class="in">```</span></span>
-<span id="cb12-81"><a href="#cb12-81"></a></span>
-<span id="cb12-84"><a href="#cb12-84"></a><span class="in">```{r}</span></span>
-<span id="cb12-85"><a href="#cb12-85"></a><span class="co"># join the csv and the shape file</span></span>
-<span id="cb12-86"><a href="#cb12-86"></a>map_data <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span></span>
-<span id="cb12-87"><a href="#cb12-87"></a>  <span class="fu">left_join</span>(crime_filtered, <span class="at">by =</span> <span class="st">"Province"</span>)</span>
-<span id="cb12-88"><a href="#cb12-88"></a><span class="in">```</span></span>
-<span id="cb12-89"><a href="#cb12-89"></a></span>
-<span id="cb12-90"><a href="#cb12-90"></a></span>
-<span id="cb12-91"><a href="#cb12-91"></a></span>
-<span id="cb12-94"><a href="#cb12-94"></a><span class="in">```{r}</span></span>
-<span id="cb12-95"><a href="#cb12-95"></a><span class="co"># plot</span></span>
-<span id="cb12-96"><a href="#cb12-96"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb12-97"><a href="#cb12-97"></a></span>
-<span id="cb12-98"><a href="#cb12-98"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb12-99"><a href="#cb12-99"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> map_data, <span class="fu">aes</span>(<span class="at">fill =</span> <span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
-<span id="cb12-100"><a href="#cb12-100"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, <span class="at">na.value =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb12-101"><a href="#cb12-101"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-102"><a href="#cb12-102"></a>    <span class="at">title =</span> <span class="st">"Total Crime Cases in South Africa (2015-2016)"</span>,</span>
-<span id="cb12-103"><a href="#cb12-103"></a>    <span class="at">fill =</span> <span class="st">"Cases"</span>,</span>
-<span id="cb12-104"><a href="#cb12-104"></a>    <span class="at">caption =</span> <span class="st">"Source: South African Police Service (SAPS)"</span></span>
-<span id="cb12-105"><a href="#cb12-105"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-106"><a href="#cb12-106"></a>  <span class="fu">theme_void</span>()</span>
-<span id="cb12-107"><a href="#cb12-107"></a></span>
-<span id="cb12-108"><a href="#cb12-108"></a></span>
-<span id="cb12-109"><a href="#cb12-109"></a><span class="in">```</span></span>
-<span id="cb12-110"><a href="#cb12-110"></a></span>
-<span id="cb12-111"><a href="#cb12-111"></a><span class="fu">#### Results</span></span>
-<span id="cb12-112"><a href="#cb12-112"></a></span>
-<span id="cb12-113"><a href="#cb12-113"></a>The resulting map visually emphasizes disparities in crime totals across provinces:</span>
-<span id="cb12-114"><a href="#cb12-114"></a></span>
-<span id="cb12-115"><a href="#cb12-115"></a><span class="ss">-   </span>**Gauteng**, **Western Cape**, **Northen** and **KwaZulu-Nata**l (most of which are densely populated provinces) appear to have higher crime totals, possibly reflecting both population density and urban challenges.</span>
-<span id="cb12-116"><a href="#cb12-116"></a></span>
-<span id="cb12-117"><a href="#cb12-117"></a><span class="ss">-   </span>On the other side of the spectrum we have **Free State**, **North West Province**, **Limpopo** and **Mpumalanga**; most of which are sparsely populated areas with relatively lower crime totals, though this does not necessarily imply safety, as underreporting and other factors might influence statistics</span>
+<div class="sourceCode" id="cb13" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a><span class="co">---</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="an">title:</span><span class="co"> "Professional Viz"</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">---</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="in">```{r}</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#packages</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="fu">library</span>(readr)</span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="fu">library</span>(sf)</span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb13-16"><a href="#cb13-16"></a><span class="in">```</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="in">```{r}</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="fu">library</span>(showtext)</span>
+<span id="cb13-22"><a href="#cb13-22"></a><span class="fu">library</span>(sysfonts)</span>
+<span id="cb13-23"><a href="#cb13-23"></a><span class="fu">library</span>(scales)</span>
+<span id="cb13-24"><a href="#cb13-24"></a></span>
+<span id="cb13-25"><a href="#cb13-25"></a><span class="co"># NYT-style font pairing</span></span>
+<span id="cb13-26"><a href="#cb13-26"></a><span class="fu">font_add_google</span>(<span class="st">"Libre Baskerville"</span>, <span class="st">"nyt_serif"</span>)  </span>
+<span id="cb13-27"><a href="#cb13-27"></a><span class="fu">font_add_google</span>(<span class="st">"Source Sans Pro"</span>, <span class="st">"nyt_sans"</span>)      </span>
+<span id="cb13-28"><a href="#cb13-28"></a><span class="fu">showtext_auto</span>()</span>
+<span id="cb13-29"><a href="#cb13-29"></a></span>
+<span id="cb13-30"><a href="#cb13-30"></a><span class="in">```</span></span>
+<span id="cb13-31"><a href="#cb13-31"></a></span>
+<span id="cb13-32"><a href="#cb13-32"></a></span>
+<span id="cb13-33"><a href="#cb13-33"></a><span class="fu">### How did Crime fare by Province in South Africa from 2015 to 2016?</span></span>
+<span id="cb13-34"><a href="#cb13-34"></a></span>
+<span id="cb13-35"><a href="#cb13-35"></a>South Africa, with its diverse landscapes and complex social history, has long grappled with issues of crime that impact public safety, economic development, and community well-being.</span>
+<span id="cb13-36"><a href="#cb13-36"></a>This solo project aims to visualize the distribution of crime across South Africa's provinces during the 2015–2016 fiscal year using spatial data analysis and data visualization.\</span>
+<span id="cb13-37"><a href="#cb13-37"></a></span>
+<span id="cb13-38"><a href="#cb13-38"></a>\</span>
+<span id="cb13-39"><a href="#cb13-39"></a>**Objective:**</span>
+<span id="cb13-40"><a href="#cb13-40"></a></span>
+<span id="cb13-41"><a href="#cb13-41"></a>The primary objective of this research is to provide a clear, intuitive map-based representation of total reported crimes by province.</span>
+<span id="cb13-42"><a href="#cb13-42"></a></span>
+<span id="cb13-45"><a href="#cb13-45"></a><span class="in">```{r}</span></span>
+<span id="cb13-46"><a href="#cb13-46"></a><span class="co"># data</span></span>
+<span id="cb13-47"><a href="#cb13-47"></a>crime <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../../data/raw/SouthAfricaCrimeStats_v2.csv"</span>)</span>
+<span id="cb13-48"><a href="#cb13-48"></a></span>
+<span id="cb13-49"><a href="#cb13-49"></a></span>
+<span id="cb13-50"><a href="#cb13-50"></a><span class="co"># shape file</span></span>
+<span id="cb13-51"><a href="#cb13-51"></a>map_data <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"../../data/raw/south_africa_Province_level_1_MAPOG/south_africa_Province_level_1.shp"</span>)</span>
+<span id="cb13-52"><a href="#cb13-52"></a></span>
+<span id="cb13-53"><a href="#cb13-53"></a></span>
+<span id="cb13-54"><a href="#cb13-54"></a><span class="in">```</span></span>
+<span id="cb13-55"><a href="#cb13-55"></a></span>
+<span id="cb13-58"><a href="#cb13-58"></a><span class="in">```{r}</span></span>
+<span id="cb13-59"><a href="#cb13-59"></a><span class="co"># increase spread by log transformation</span></span>
+<span id="cb13-60"><a href="#cb13-60"></a>crime_filtered <span class="ot">&lt;-</span> crime <span class="sc">%&gt;%</span></span>
+<span id="cb13-61"><a href="#cb13-61"></a>  <span class="fu">select</span>(Province, <span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-62"><a href="#cb13-62"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>))</span>
+<span id="cb13-63"><a href="#cb13-63"></a><span class="in">```</span></span>
+<span id="cb13-64"><a href="#cb13-64"></a></span>
+<span id="cb13-67"><a href="#cb13-67"></a><span class="in">```{r}</span></span>
+<span id="cb13-68"><a href="#cb13-68"></a><span class="co"># Inspect data</span></span>
+<span id="cb13-69"><a href="#cb13-69"></a><span class="fu">head</span>(map_data)</span>
+<span id="cb13-70"><a href="#cb13-70"></a><span class="fu">head</span>(crime)</span>
+<span id="cb13-71"><a href="#cb13-71"></a></span>
+<span id="cb13-72"><a href="#cb13-72"></a></span>
+<span id="cb13-73"><a href="#cb13-73"></a><span class="in">```</span></span>
+<span id="cb13-74"><a href="#cb13-74"></a></span>
+<span id="cb13-77"><a href="#cb13-77"></a><span class="in">```{r}</span></span>
+<span id="cb13-78"><a href="#cb13-78"></a><span class="co"># group by province and create a sum for the entries</span></span>
+<span id="cb13-79"><a href="#cb13-79"></a>crime_filtered <span class="ot">&lt;-</span> crime <span class="sc">%&gt;%</span></span>
+<span id="cb13-80"><a href="#cb13-80"></a>  <span class="fu">group_by</span>(Province) <span class="sc">%&gt;%</span></span>
+<span id="cb13-81"><a href="#cb13-81"></a>  <span class="fu">summarise</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(<span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>))) </span>
+<span id="cb13-82"><a href="#cb13-82"></a></span>
+<span id="cb13-83"><a href="#cb13-83"></a><span class="co"># Standardize province names and lowercase &amp; remove extra spaces</span></span>
+<span id="cb13-84"><a href="#cb13-84"></a>crime_filtered <span class="ot">&lt;-</span> crime_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb13-85"><a href="#cb13-85"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(Province))) </span>
+<span id="cb13-86"><a href="#cb13-86"></a></span>
+<span id="cb13-87"><a href="#cb13-87"></a><span class="co"># correct KwaZulu-Natal Kwazulu/Natal mismatch</span></span>
+<span id="cb13-88"><a href="#cb13-88"></a>crime_filtered <span class="ot">&lt;-</span> crime_filtered <span class="sc">%&gt;%</span></span>
+<span id="cb13-89"><a href="#cb13-89"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">ifelse</span>(Province <span class="sc">==</span> <span class="st">"kwazulu-natal"</span>, <span class="st">"kwazulu/natal"</span>, Province))</span>
+<span id="cb13-90"><a href="#cb13-90"></a></span>
+<span id="cb13-91"><a href="#cb13-91"></a><span class="co"># rename shape1 to province</span></span>
+<span id="cb13-92"><a href="#cb13-92"></a>map_data <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span></span>
+<span id="cb13-93"><a href="#cb13-93"></a>  <span class="fu">rename</span>(<span class="at">Province =</span> shape1) <span class="sc">%&gt;%</span></span>
+<span id="cb13-94"><a href="#cb13-94"></a>  <span class="fu">mutate</span>(<span class="at">Province =</span> <span class="fu">tolower</span>(<span class="fu">trimws</span>(Province)))</span>
+<span id="cb13-95"><a href="#cb13-95"></a><span class="in">```</span></span>
+<span id="cb13-96"><a href="#cb13-96"></a></span>
+<span id="cb13-99"><a href="#cb13-99"></a><span class="in">```{r}</span></span>
+<span id="cb13-100"><a href="#cb13-100"></a><span class="co"># join the csv and the shape file</span></span>
+<span id="cb13-101"><a href="#cb13-101"></a>map_data <span class="ot">&lt;-</span> map_data <span class="sc">%&gt;%</span></span>
+<span id="cb13-102"><a href="#cb13-102"></a>  <span class="fu">left_join</span>(crime_filtered, <span class="at">by =</span> <span class="st">"Province"</span>)</span>
+<span id="cb13-103"><a href="#cb13-103"></a><span class="in">```</span></span>
+<span id="cb13-104"><a href="#cb13-104"></a></span>
+<span id="cb13-105"><a href="#cb13-105"></a></span>
+<span id="cb13-106"><a href="#cb13-106"></a></span>
+<span id="cb13-109"><a href="#cb13-109"></a><span class="in">```{r}</span></span>
+<span id="cb13-110"><a href="#cb13-110"></a><span class="co"># plot</span></span>
+<span id="cb13-111"><a href="#cb13-111"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-112"><a href="#cb13-112"></a></span>
+<span id="cb13-113"><a href="#cb13-113"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb13-114"><a href="#cb13-114"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> map_data, <span class="fu">aes</span>(<span class="at">fill =</span> <span class="st">`</span><span class="at">2015-2016</span><span class="st">`</span>), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb13-115"><a href="#cb13-115"></a></span>
+<span id="cb13-116"><a href="#cb13-116"></a></span>
+<span id="cb13-117"><a href="#cb13-117"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
+<span id="cb13-118"><a href="#cb13-118"></a>  <span class="at">option =</span> <span class="st">"plasma"</span>,</span>
+<span id="cb13-119"><a href="#cb13-119"></a>  <span class="at">labels =</span> <span class="fu">label_comma</span>(),</span>
+<span id="cb13-120"><a href="#cb13-120"></a>  <span class="at">na.value =</span> <span class="st">"orange"</span></span>
+<span id="cb13-121"><a href="#cb13-121"></a>  )<span class="sc">+</span></span>
+<span id="cb13-122"><a href="#cb13-122"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-123"><a href="#cb13-123"></a>    <span class="at">title =</span> <span class="st">"Total Crime Cases in South Africa (2015–2016)"</span>,</span>
+<span id="cb13-124"><a href="#cb13-124"></a>    <span class="at">subtitle =</span> <span class="st">"White regions indicate Lesotho and Eswatini—independent countries geographically distinct from South Africa and excluded from the crime statistics."</span>,</span>
+<span id="cb13-125"><a href="#cb13-125"></a>    <span class="at">fill =</span> <span class="st">" "</span>,</span>
+<span id="cb13-126"><a href="#cb13-126"></a>    <span class="at">caption =</span> <span class="st">"Source: South African Police Service (SAPS)"</span></span>
+<span id="cb13-127"><a href="#cb13-127"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-128"><a href="#cb13-128"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb13-129"><a href="#cb13-129"></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-130"><a href="#cb13-130"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(</span>
+<span id="cb13-131"><a href="#cb13-131"></a>      <span class="at">family =</span> <span class="st">"nyt_serif"</span>,</span>
+<span id="cb13-132"><a href="#cb13-132"></a>      <span class="at">size =</span> <span class="dv">24</span>,</span>
+<span id="cb13-133"><a href="#cb13-133"></a>      <span class="at">face =</span> <span class="st">"bold"</span>,</span>
+<span id="cb13-134"><a href="#cb13-134"></a>      <span class="at">hjust =</span> <span class="fl">0.5</span></span>
+<span id="cb13-135"><a href="#cb13-135"></a>    ),</span>
+<span id="cb13-136"><a href="#cb13-136"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(</span>
+<span id="cb13-137"><a href="#cb13-137"></a>      <span class="at">family =</span> <span class="st">"nyt_sans"</span>,</span>
+<span id="cb13-138"><a href="#cb13-138"></a>      <span class="at">size =</span> <span class="dv">12</span>,</span>
+<span id="cb13-139"><a href="#cb13-139"></a>      <span class="at">color =</span> <span class="st">"gray30"</span>,</span>
+<span id="cb13-140"><a href="#cb13-140"></a>      <span class="at">hjust =</span> <span class="fl">0.5</span>,</span>
+<span id="cb13-141"><a href="#cb13-141"></a>      <span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">b =</span> <span class="dv">10</span>)</span>
+<span id="cb13-142"><a href="#cb13-142"></a>    ),</span>
+<span id="cb13-143"><a href="#cb13-143"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(</span>
+<span id="cb13-144"><a href="#cb13-144"></a>      <span class="at">family =</span> <span class="st">"nyt_sans"</span>,</span>
+<span id="cb13-145"><a href="#cb13-145"></a>      <span class="at">size =</span> <span class="dv">11</span></span>
+<span id="cb13-146"><a href="#cb13-146"></a>    ),</span>
+<span id="cb13-147"><a href="#cb13-147"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(</span>
+<span id="cb13-148"><a href="#cb13-148"></a>      <span class="at">family =</span> <span class="st">"nyt_sans"</span>,</span>
+<span id="cb13-149"><a href="#cb13-149"></a>      <span class="at">size =</span> <span class="dv">10</span></span>
+<span id="cb13-150"><a href="#cb13-150"></a>    ),</span>
+<span id="cb13-151"><a href="#cb13-151"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(</span>
+<span id="cb13-152"><a href="#cb13-152"></a>      <span class="at">family =</span> <span class="st">"nyt_sans"</span>,</span>
+<span id="cb13-153"><a href="#cb13-153"></a>      <span class="at">size =</span> <span class="dv">9</span>,</span>
+<span id="cb13-154"><a href="#cb13-154"></a>      <span class="at">hjust =</span> <span class="dv">0</span></span>
+<span id="cb13-155"><a href="#cb13-155"></a>    )</span>
+<span id="cb13-156"><a href="#cb13-156"></a>  )</span>
+<span id="cb13-157"><a href="#cb13-157"></a></span>
+<span id="cb13-158"><a href="#cb13-158"></a><span class="in">```</span></span>
+<span id="cb13-159"><a href="#cb13-159"></a></span>
+<span id="cb13-160"><a href="#cb13-160"></a><span class="fu">#### Results</span></span>
+<span id="cb13-161"><a href="#cb13-161"></a></span>
+<span id="cb13-162"><a href="#cb13-162"></a>The resulting map visually emphasizes disparities in crime totals across provinces:</span>
+<span id="cb13-163"><a href="#cb13-163"></a></span>
+<span id="cb13-164"><a href="#cb13-164"></a><span class="ss">-   </span>**Gauteng**, **Western Cape**, **Northen** and **KwaZulu-Nata**l (most of which are densely populated provinces) appear to have higher crime totals, possibly reflecting both population density and urban challenges.</span>
+<span id="cb13-165"><a href="#cb13-165"></a></span>
+<span id="cb13-166"><a href="#cb13-166"></a><span class="ss">-   </span>On the other side of the spectrum we have **Free State**, **North West Province**, **Limpopo** and **Mpumalanga**; most of which are sparsely populated areas with relatively lower crime totals, though this does not necessarily imply safety, as underreporting and other factors might influence statistics</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -204,7 +204,12 @@ cookieconsent.run({
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/summarysheet/summary-sheet.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">summary sheet</span></a>
+  <a href="../../src/summarysheet/summary-sheet-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">summary sheet 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/summarysheet/summary-sheet.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">summary sheet 2</span></a>
   </div>
 </li>
       </ul>
@@ -378,12 +383,12 @@ cookieconsent.run({
 <div class="cell">
 <details class="code-fold"><summary>Code</summary><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">ggplot</span>(frogID_data, <span class="fu">aes</span>(<span class="at">x =</span> stateProvince, <span class="at">fill =</span> stateProvince)) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">ggplot</span>(frogID_data, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(stateProvince, stateProvince, <span class="at">FUN =</span> length))) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">geom_bar</span>( <span class="at">fill =</span> <span class="st">"#4C72B6"</span>) <span class="sc">+</span></span>
 <span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Number of Frog Occurrences by State"</span>,</span>
-<span id="cb3-6"><a href="#cb3-6"></a>       <span class="at">x =</span> <span class="st">"State/Province"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>       <span class="at">x =</span> <span class="st">" "</span>, <span class="at">y =</span> <span class="st">" "</span>) <span class="sc">+</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">70</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-8"><a href="#cb3-8"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>( <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="hw01-tt_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
@@ -1018,8 +1023,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
-      <a href="../../src/summarysheet/summary-sheet.html" class="pagination-link" aria-label="summary sheet">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">summary sheet</span></span>
+      <a href="../../src/summarysheet/summary-sheet.html" class="pagination-link" aria-label="summary sheet 2">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">summary sheet 2</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1064,16 +1069,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-40"><a href="#cb4-40"></a><span class="in">```{r}</span></span>
 <span id="cb4-41"><a href="#cb4-41"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb4-42"><a href="#cb4-42"></a></span>
-<span id="cb4-43"><a href="#cb4-43"></a><span class="fu">ggplot</span>(frogID_data, <span class="fu">aes</span>(<span class="at">x =</span> stateProvince, <span class="at">fill =</span> stateProvince)) <span class="sc">+</span></span>
-<span id="cb4-44"><a href="#cb4-44"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb4-43"><a href="#cb4-43"></a><span class="fu">ggplot</span>(frogID_data, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(stateProvince, stateProvince, <span class="at">FUN =</span> length))) <span class="sc">+</span></span>
+<span id="cb4-44"><a href="#cb4-44"></a>  <span class="fu">geom_bar</span>( <span class="at">fill =</span> <span class="st">"#4C72B6"</span>) <span class="sc">+</span></span>
 <span id="cb4-45"><a href="#cb4-45"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Number of Frog Occurrences by State"</span>,</span>
-<span id="cb4-46"><a href="#cb4-46"></a>       <span class="at">x =</span> <span class="st">"State/Province"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb4-46"><a href="#cb4-46"></a>       <span class="at">x =</span> <span class="st">" "</span>, <span class="at">y =</span> <span class="st">" "</span>) <span class="sc">+</span></span>
 <span id="cb4-47"><a href="#cb4-47"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb4-48"><a href="#cb4-48"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">70</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb4-48"><a href="#cb4-48"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>( <span class="at">hjust =</span> <span class="dv">1</span>))</span>
 <span id="cb4-49"><a href="#cb4-49"></a></span>
 <span id="cb4-50"><a href="#cb4-50"></a></span>
 <span id="cb4-51"><a href="#cb4-51"></a><span class="in">```</span></span>
 <span id="cb4-52"><a href="#cb4-52"></a><span class="at">&gt; Looking at the bar chart of frog occurrences by state, it is clear that frog records are unevenly distributed across Australia. New South Wales has by far the highest number of occurrences, with close to 60,000 records, followed by Victoria and Queensland (32000 and 21000 respectively) , which also show substantial numbers of observations. Other states, such as South Australia, Tasmania, and the Australian Capital Territory, contribute far fewer records, while the Northern Territory and Other Territories have very limited observations. </span></span>
+<span id="cb4-53"><a href="#cb4-53"></a></span>
+<span id="cb4-54"><a href="#cb4-54"></a></span>
+<span id="cb4-55"><a href="#cb4-55"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
