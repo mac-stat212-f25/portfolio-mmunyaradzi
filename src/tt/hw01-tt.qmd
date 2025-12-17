@@ -34,13 +34,17 @@ frog_names <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience
 ```{r}
 library(ggplot2)
 
-ggplot(frogID_data, aes(x = stateProvince, fill = stateProvince)) +
-  geom_bar() +
+ggplot(frogID_data, aes(y = reorder(stateProvince, stateProvince, FUN = length))) +
+  geom_bar( fill = "#4C72B6") +
   labs(title = "Number of Frog Occurrences by State",
-       x = "State/Province", y = "Count") +
+       x = " ", y = " ") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 70, hjust = 1))
+  theme(axis.text.x = element_text( hjust = 1))
 
 
 ```
 > Looking at the bar chart of frog occurrences by state, it is clear that frog records are unevenly distributed across Australia. New South Wales has by far the highest number of occurrences, with close to 60,000 records, followed by Victoria and Queensland (32000 and 21000 respectively) , which also show substantial numbers of observations. Other states, such as South Australia, Tasmania, and the Australian Capital Territory, contribute far fewer records, while the Northern Territory and Other Territories have very limited observations. 
+
+
+
+

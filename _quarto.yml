@@ -70,6 +70,7 @@ book:
 
     - part: "Summary Sheet"
       chapters:
+      - src/summarysheet/summary-sheet-1.qmd
       - src/summarysheet/summary-sheet.qmd
 
     - part: "TidyTuesday"
